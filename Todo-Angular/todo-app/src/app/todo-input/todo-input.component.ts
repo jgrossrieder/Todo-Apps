@@ -1,19 +1,19 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from "@angular/core";
+import { TodoService } from "../shared/todo-storage.service";
 
 @Component({
-    selector: 'app-todo-input',
-    templateUrl: './todo-input.component.html',
-    styleUrls: ['./todo-input.component.css']
+  selector: "app-todo-input",
+  templateUrl: "./todo-input.component.html",
+  styleUrls: ["./todo-input.component.css"],
 })
 export class TodoInputComponent {
+  todo: string = "";
 
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onTodoAdd: EventEmitter<any> = new EventEmitter<any>();
-    todo: String = '' ;
+  constructor(private todoService: TodoService) {}
 
-    onSaveTodo() {
-        this
-        .onTodoAdd
-        .emit(this.todo);
-    }
+  onSaveTodo() {
+    this.todoService.addTodo(this.todo).subscribe(() => {
+      this.todo = "";
+    });
+  }
 }
