@@ -5,20 +5,23 @@
     </div>
     <todoInput @onTodoAdd = "handleTodoAdd"></todoInput>
     <hr/>
-    <div v-for="(todo,index) in todos" 
-    :key="index" 
+    <TodoList :todos="todos"
+      @onDeleteTodo="handleDeleteTodo"></TodoList>
+
+    <!-- <div v-for="(todo,index) in todos"
+    :key="index"
     class="margin-top-50">
       <todoList
       @onDeleteTodo = "handleDeleteTodo"
       :todoEl="todo"
       :todoInd="index"></todoList>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import todoInput from './components/todo-input/todo-input'
-import todoList from './components/todo-list/todo-list.vue'
+import TodoList from './components/todo-list/todo-list.vue'
 export default {
   name: 'App',
   data() {
@@ -38,7 +41,7 @@ export default {
   },
   components: {
     todoInput,
-    todoList
+    TodoList
   }
 }
 </script>

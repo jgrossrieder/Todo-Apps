@@ -1,53 +1,26 @@
 <template>
-     <div class="container">
-
-      <input   
-      type="text" 
-      placeholder="Enter Todo"
-      disabled="true" 
-      class="todo--input"
-      v-model="todoEl"
-      />
-      
-      <button 
-      type="button" 
-      class="btn delete"
-      v-on:click="onDeleteTodo"
-      >Delete</button>
-
+  <div>
+    <div v-for="(todo,index) in todos" :key="index" class="margin-top-50">
+      <TodoItem @onDeleteTodo="onDeleteTodo" :todoEl="todo" :todoInd="index"></TodoItem>
     </div>
+  </div>
 </template>
+
 <script>
+import TodoItem from '../todo-item/todo-item.vue'
 export default {
   name: "todo-list",
-  props: [
-    'todoEl',
-    'todoInd'
-    ],
+  props: ["todos"],
   methods: {
-    onDeleteTodo() {
-      this.$emit('onDeleteTodo',this.todoInd)
+    onDeleteTodo(index) {
+      this.$emit("onDeleteTodo", index);
     }
+  },
+  components: {
+    TodoItem
   }
-}
+};
 </script>
-<style scoped>
-.container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-}
-.todo--input {
-    width: 40%;
-    padding: 12px 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 20px;
-}
-.container .delete {
-    background-color: var(--btn-delete-color);
-}
-.todo--input:hover {
-    box-shadow: var(--primary-shadow);
-}
+
+<style>
 </style>
