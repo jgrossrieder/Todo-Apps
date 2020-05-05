@@ -47,12 +47,7 @@ class App extends Component {
     })
   }
   render() {
-    const todoList = this.state.todos.map((todo, i) => {
-      return <TodoList 
-      key={i} 
-      value={todo} 
-      deleteTodo={() => this.onDeleteTodo(i)} />
-    })
+
     return (
       <div className="App">
         <div className="container--todo-header">
@@ -63,7 +58,7 @@ class App extends Component {
           clicked={this.onSaveTodo}
           changed={this.onInputChanged} />
         <hr></hr>
-        {todoList}
+        <TodoList todos={this.state.todos}  delete={this.onDeleteTodo}></TodoList>
       </div>
     );
   }

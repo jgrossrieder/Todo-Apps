@@ -1,23 +1,26 @@
-import React from 'react'
-import './todo-list.css'
+import React from "react";
+import TodoItem from "../todo-item/todo-item";
 
-const todoList = (props) => {
-    return (
-        <div className="container">
-            <input
-                type="text"
-                className="todo--input"
-                value={props.value}
-                disabled={true} />
+class TodoList extends React.Component {
+  state = {
+    todos: [],
+    todo_input: {
+      btn_disabled: true,
+      input_text: "",
+    },
+  };
 
-            <button
-                type="button"
-                className="btn delete"
-                onClick={props.deleteTodo}
-            >Delete
-            </button>
-
-        </div>
-    )
+  render() {
+    const todoList = this.props.todos.map((todo, i) => {
+      return (
+        <TodoItem
+          key={i}
+          value={todo}
+          deleteTodo={() => this.props.delete(i)}
+        />
+      );
+    });
+    return todoList;
+  }
 }
-export default todoList;
+export default TodoList;
